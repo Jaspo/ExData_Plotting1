@@ -1,4 +1,4 @@
-#read file
+#read file 
 EPC_data<-read.table(file = "./household_power_consumption.txt",sep = ";",header = TRUE)
 
 #describe data
