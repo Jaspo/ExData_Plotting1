@@ -28,8 +28,14 @@ EPC_data$Sub_metering_1<-as.numeric(as.character(EPC_data$Sub_metering_1))
 EPC_data$Sub_metering_2<-as.numeric(as.character(EPC_data$Sub_metering_2))
 
 
-#Plot1
+#Plot3
 par(mfcol=c(1,1))
-hist(EPC_data$Global_active_power,main = "Global Active Power",xlab = "Global Active Power (kilowatts)",col = "Red")
-dev.copy(png,file="plot1.png",width = 480,height = 480)
+with(EPC_data,plot(DateTime,Sub_metering_1, type= "l", xlab = "",ylab = "Energy sub metering"))
+lines(EPC_data$DateTime,EPC_data$Sub_metering_2,col="Red")
+lines(EPC_data$DateTime,EPC_data$Sub_metering_3,col="Blue")
+legend("topright", cex=0.5,pch="-",col=c("black","red","blue"),legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+
+dev.copy(png,file="plot3.png",width = 480,height = 480)
 dev.off()
+
+

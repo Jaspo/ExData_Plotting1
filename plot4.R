@@ -1,4 +1,4 @@
-#read file
+#read file 
 EPC_data<-read.table(file = "./household_power_consumption.txt",sep = ";",header = TRUE)
 
 #describe data
@@ -28,8 +28,17 @@ EPC_data$Sub_metering_1<-as.numeric(as.character(EPC_data$Sub_metering_1))
 EPC_data$Sub_metering_2<-as.numeric(as.character(EPC_data$Sub_metering_2))
 
 
-#Plot1
-par(mfcol=c(1,1))
-hist(EPC_data$Global_active_power,main = "Global Active Power",xlab = "Global Active Power (kilowatts)",col = "Red")
-dev.copy(png,file="plot1.png",width = 480,height = 480)
+#Plot4
+
+par(mfcol=c(2,2))
+with(EPC_data,{
+  plot(DateTime,Global_active_power,type = "l", xlab = "",ylab = "Global Active Power (kilowatts)")
+  plot(DateTime,Sub_metering_1, type= "l", xlab = "",ylab = "Energy sub metering")
+  lines(EPC_data$DateTime,EPC_data$Sub_metering_2,col="Red")
+  lines(EPC_data$DateTime,EPC_data$Sub_metering_3,col="Blue")
+  legend("topright", cex=0.2,pch="-",col=c("black","red","blue"),legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+  plot(DateTime,Voltage,type = "l", xlab = "datetime",ylab = "Voltage")
+  plot(DateTime,Global_reactive_power,type = "l", xlab = "datetime",ylab = "Global_reactive_power")
+})
+dev.copy(png,file="plot4.png",width = 480,height = 480)
 dev.off()
